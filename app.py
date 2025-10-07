@@ -64,7 +64,8 @@ if st.session_state.username is None:
         st.session_state.username = username_input
         # Update users dictionary (simplified for now)
         st.session_state.users[st.session_state.username] = st.session_state.username # Using username as key and value for simplicity
-        st.experimental_rerun() # Rerun to show the chat interface
+        # Removed st.experimental_rerun() here. Streamlit will rerun automatically.
+
 
 # Display welcome message and chat interface if username is set
 if st.session_state.username:
@@ -83,10 +84,7 @@ if st.session_state.username:
 
             if send_button and message_input_form:
                 add_message(st.session_state.username, message_input_form) # Save message to database
-                # Since we are not using a continuous polling loop,
-                # we don't need to append to session_state.messages here.
-                # The message will appear after the next rerun triggered by user interaction
-                # or manual page refresh.
+                # No need to append to session_state.messages here, the next poll will update it
                 pass
 
 
